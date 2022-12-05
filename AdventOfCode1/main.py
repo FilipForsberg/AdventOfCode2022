@@ -1,3 +1,4 @@
+#Calculates the sum of every elf and adds to a list
 def cal_calc(input):
     groups = input.strip().split("\n\n")
     total = []
@@ -7,14 +8,12 @@ def cal_calc(input):
         total.append(sum(x))
     return total
 #p1
-import time
-start_time = time.time()
 f = open('input.txt', 'r')
 input = f.read()
 
 elves = cal_calc(input)
 print(max(elves))
-print("--- %s seconds ---" % (time.time() - start_time))
+
 #p2
 elves.sort()
 print(sum(elves[-3:]))

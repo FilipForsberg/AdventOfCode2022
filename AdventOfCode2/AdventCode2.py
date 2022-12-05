@@ -62,11 +62,6 @@ def guideSwap(hand):
             elif hand[1] == 'Z':
                 hand[1] = 'X'
 
-import time
-start_time = time.time()
 input = input_reader()
-print(input)
-
 score = handCalc(input)
 print(score)
-print("--- %s seconds ---" % (time.time() - start_time))
