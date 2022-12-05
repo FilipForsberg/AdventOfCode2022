@@ -40,19 +40,12 @@ def move_boxes(box_stacks, moves, crateMover):
     temp = copy.deepcopy(box_stacks)
     for move in transformed_moves:
         nr, start, end = move[0], move[1], move[2]
-        print("Move ", nr, "from", start, "to", end)
-        print("Stack ", start,  temp[start - 1])
-        print("Stack ", end, temp[end - 1])
         boxes_moved = temp[start - 1][-nr:]
         if not crateMover:
             boxes_moved.reverse()
-        print("Boxes moved: ", boxes_moved)
 
         temp[end - 1] += boxes_moved
         del temp[start - 1][-nr:]
-
-        print("Stack  ", start, temp[start - 1])
-        print("Stack  ", end, temp[end - 1])
 
     top = ''.join(stack[-1] for stack in temp)
 
@@ -69,7 +62,6 @@ box_stacks = get_crate_stacks(crates)
 #p1
 print(move_boxes(box_stacks,transformed_moves, False))
 
-print("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
 #p2
 print(move_boxes(box_stacks,transformed_moves, True))
 
