@@ -3,6 +3,7 @@ class Directory:
         self.name = name
         self.root = root
         self.size = 0
+        self.totalSize = 0
         self.dirs, self.files = [], []
 
     def addDirectory(self, dir):
@@ -26,6 +27,14 @@ class Directory:
     def getDirs(self):
         return self.dirs
 
+    def getTotalSize(self):
+        size = 0
+        size += self.getSize()
+        for dir in self.dirs:
+            size += dir.getTotalSize()
+        self.totalSize = size
+        return self.totalSize
+
 class File:
     def __init__(self, size, name):
         self.name = name
@@ -40,24 +49,25 @@ def build_dir(input, currentDir):
                 if line[2] == '..':
                     currentDir = currentDir.root
                     continue
-
-                currentDir = currentDir.goTo(line[2])
+                elif line[2].islower():
+                    currentDir = currentDir.goTo(line[2])
+                else:
+                    print("cancer")
             continue
         elif line[0] == "dir":
             currentDir.addDirectory(line[1])
         else:
             currentDir.addFile(line[0], line[1])
     return start
-def total_size(start, currentSum):
-    currentSum += start.getSize()
-    for dir in start.getDirs():
-            currentSum += total_size(dir, 0)
-    return currentSum
+
+
 
 def p1_solve(start, currentSum):
-    if start.getSize() <= (100000):
-        currentSum += start.getSize()
-    for dir in start.getDirs():
+    if start.getTotalSize() <= 10**5:
+        currentSum += start.getTotalSize()
+        return currentSum
+    else:
+        for dir in start.getDirs():
             currentSum += p1_solve(dir, 0)
     return currentSum
 
@@ -68,9 +78,11 @@ input = f.readlines()
 start = Directory("/", None)
 start = build_dir(input, start)
 
+
 ans_p1 = 1182909
 total = 42677139
+print(start.getTotalSize())
 print(p1_solve(start,0))
-print(total_size(start, 0))
+
 
 
