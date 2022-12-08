@@ -111,11 +111,3 @@ input = [line.strip() for line in input]
 
 print(Solve(input, False))
 print(Solve(input, True))
-
-
-#Each tree is represented as a single digit whose value is its height, where 0 is the shortest and 9 is the tallest.
-
-#A tree is visible if all of the other trees between it and an edge of the grid are shorter than it. Only consider trees in the same row or column; that is, only look up, down, left, or right from any given tree.
-#All of the trees around the edge of the grid are visible - since they are already on the edge, there are no trees to block the view. In this example, that only leaves the interior nine trees to consider:
-
-#Consider your map; how many trees are visible from outside the grid?
